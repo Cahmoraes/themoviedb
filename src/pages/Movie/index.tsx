@@ -35,8 +35,6 @@ const Movie: React.FC = () => {
 
   const [movie, setMovie] = useState<MovieProps>({} as MovieProps)
 
-  console.log(id)
-
   useEffect(() => {
     async function getMovie() {
       const { data } = await api.get(`movie/${id}?api_key=${key}&language=en-US`)

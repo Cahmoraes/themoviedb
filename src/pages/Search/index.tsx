@@ -32,11 +32,9 @@ const Search: React.FC = () => {
         const search = new URLSearchParams(location.search)
         if (search.has('m') === true) {
           const querySearch = search.get('m') as string
-          console.log(querySearch)
           if (querySearch?.length > 0) {
             const { data } = await api.get(`search/movie?api_key=${key}&query=${querySearch}`)
             const results = data.results as MovieProps[]
-            console.log(results)
             setResponseMovies(results)
           } else {
             throw new Error('Por favor, preencher com um título')

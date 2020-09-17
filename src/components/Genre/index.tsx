@@ -36,7 +36,6 @@ const Genre: React.FC<GenreProps> = ({ title, id }) => {
       const { data } = await api.get(`discover/movie?api_key=${key}&with_genres=${id}&language=en-US`)
       const results = data.results.slice(0, 5) as MovieProps[]
       setResponseMovies(results)
-      console.log(results)
     }
 
     getMovieByGenre()
