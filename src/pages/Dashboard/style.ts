@@ -1,11 +1,24 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
+
 
 interface FormProps {
   isError?: boolean;
 }
 
+const animaLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`
 
-export const Container = styled.div``
+export const Container = styled.div`
+  animation: ${animaLeft} .5s forwards;
+`
 
 export const Title = styled.h1`
   font-size: 3rem;

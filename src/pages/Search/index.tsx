@@ -4,7 +4,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom'
 import { useApi } from '../../hooks/apiContext'
 import api from '../../services/api';
 
-import { Container, Title, Header, Form, Movies, Movie, ErrorMessage } from './style'
+import { Container, Title, Header, Form, Movies, Movie, ErrorMessage, Loading } from './style'
 
 interface MovieProps {
   id: number
@@ -22,6 +22,7 @@ const Search: React.FC = () => {
   const history = useHistory()
 
   const [isError, setIsError] = useState('')
+  const [loading, setLoading] = useState(false)
   const [responseMovies, setResponseMovies] = useState<MovieProps[]>([])
   const inputSearchMovie = useRef<HTMLInputElement | null>(null)
 
@@ -29,6 +30,7 @@ const Search: React.FC = () => {
     async function getMovies() {
       setIsError('')
       try {
+        setLoading(true)
         const search = new URLSearchParams(location.search)
         if (search.has('m') === true) {
           const querySearch = search.get('m') as string
@@ -44,6 +46,7 @@ const Search: React.FC = () => {
         setIsError(e.message)
       } finally {
         inputSearchMovie!.current!.value = ''
+        setLoading(false)
       }
     }
     getMovies()
@@ -77,8 +80,8 @@ const Search: React.FC = () => {
         </Form>
 
         {isError && <ErrorMessage>{isError}</ErrorMessage>}
-
       </Header>
+      {loading && <Loading>Loading...</Loading>}
       <Movies>
         {
           responseMovies.map(movie => (

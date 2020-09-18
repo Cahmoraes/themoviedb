@@ -1,10 +1,23 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 interface FormProps {
   isError?: boolean;
 }
 
-export const Container = styled.div``
+const animaLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`
+
+export const Container = styled.div`
+  animation: ${animaLeft} .5s forwards;
+`
 
 export const Title = styled.h1`
   font-size: 3rem;
@@ -96,4 +109,9 @@ export const ErrorMessage = styled.span`
   color: #cc3838;
   font-size: 1.8rem;
   margin-top: 0.5rem;
+`
+
+export const Loading = styled.h3`
+  font-size: 1.8rem;
+  margin: 2rem 0;
 `
